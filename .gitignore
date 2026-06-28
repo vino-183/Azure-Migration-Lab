@@ -1,0 +1,25 @@
+# PowerShell
+*.log
+*.tmp
+
+# VS Code
+.vscode/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Azure
+*.publishsettings
+
+# PowerShell credentials
+*.clixml
+
+# Output
+PowerShell/Logs/*
+PowerShell/Output/*
+
+# OS files
+Thumbs.db
+.DS_Store
