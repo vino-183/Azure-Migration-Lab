@@ -98,3 +98,11 @@ if ($PSCmdlet.ShouldProcess($VNetName, "Create Virtual Network")) {
 
     Write-LabLog "Virtual Network '$VNetName' created successfully." -Level SUCCESS
 }
+Write-LabLog "Verifying Virtual Network deployment..."
+
+$vnet = Get-AzVirtualNetwork `
+    -ResourceGroupName $ResourceGroupName `
+    -Name $VNetName `
+    -ErrorAction Stop
+
+Write-LabLog "Virtual Network verification successful." -Level SUCCESS
