@@ -51,6 +51,9 @@ $BackendNSGName = "$Prefix-backend-nsg"
 $WebPublicIPName = "$Prefix-web-pip"
 $BastionPublicIPName = "$Prefix-bastion-pip"
 
+$PublicIPSku = "Standard"
+$PublicIPAllocationMethod = "Static"
+
 #---------------------------------------------------------
 # Bastion
 #---------------------------------------------------------

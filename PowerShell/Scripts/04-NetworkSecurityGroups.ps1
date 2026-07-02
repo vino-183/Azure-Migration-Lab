@@ -9,6 +9,7 @@ Purpose:    Creates Network Security Groups for the Azure Migration Lab
 param()
 
 # Import common modules
+
 . "$PSScriptRoot\..\Common\Logging.ps1"
 . "$PSScriptRoot\..\Common\Validation.ps1"
 . "$PSScriptRoot\..\Common\01-Variables.ps1"
