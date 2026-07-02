@@ -74,6 +74,7 @@ $webNSG = Add-AzNetworkSecurityRuleConfig `
     -Access Allow
 
 # Commit the changes back to Azure
+
 if ($PSCmdlet.ShouldProcess($WebNSGName, "Add HTTP Rule")) {
 
     Set-AzNetworkSecurityGroup `
