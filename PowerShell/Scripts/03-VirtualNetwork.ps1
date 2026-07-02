@@ -57,9 +57,9 @@ $webSubnet = New-AzVirtualNetworkSubnetConfig `
     -Name $WebSubnetName `
     -AddressPrefix $WebSubnetPrefix
 
-$sqlSubnet = New-AzVirtualNetworkSubnetConfig `
-    -Name $SqlSubnetName `
-    -AddressPrefix $SqlSubnetPrefix
+$backendSubnet = New-AzVirtualNetworkSubnetConfig `
+    -Name $BackendSubnetName `
+    -AddressPrefix $BackendSubnetPrefix
 
 $bastionSubnet = New-AzVirtualNetworkSubnetConfig `
     -Name $BastionSubnetName `
@@ -76,23 +76,7 @@ if ($PSCmdlet.ShouldProcess($VNetName, "Create Virtual Network")) {
         -ResourceGroupName $ResourceGroupName `
         -Location $Location `
         -AddressPrefix $VNetAddressSpace `
-        -Subnet $webSubnet, $sqlSubnet, $bastionSubnet `
-        -Tag $Tags `
-        -ErrorAction Stop
-
-    Write-LabLog "Virtual Network created successfully." -Level SUCCESS
-}
-
-if ($PSCmdlet.ShouldProcess($VNetName, "Create Virtual Network")) {
-
-    Write-LabLog "Creating Virtual Network '$VNetName'..."
-
-    New-AzVirtualNetwork `
-        -Name $VNetName `
-        -ResourceGroupName $ResourceGroupName `
-        -Location $Location `
-        -AddressPrefix $VNetAddressSpace `
-        -Subnet $webSubnet, $sqlSubnet, $bastionSubnet `
+        -Subnet $webSubnet, $backendSubnet, $bastionSubnet `
         -Tag $Tags `
         -ErrorAction Stop
 

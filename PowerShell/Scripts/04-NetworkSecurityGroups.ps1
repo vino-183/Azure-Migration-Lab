@@ -114,7 +114,7 @@ else {
 
 }
 
-# Add the HTTP Allow rule
+# add the Allow-SQL-From-Web rule to the backend NSG
 
 Write-LabLog "Adding Allow-SQL-From-Web rule to '$BackendNSGName'..."
 
@@ -138,14 +138,32 @@ if ($PSCmdlet.ShouldProcess($BackendNSGName, "Add Allow-SQL-From-Web Rule")) {
 
     Write-LabLog "Allow-SQL-From-Web rule added successfully." -Level SUCCESS
 }
+
+#---------------------------------------------------------
+# Retrieve Virtual Network
+#---------------------------------------------------------
+
+Write-LabLog "Retrieving Virtual Network '$VNetName'..."
+
+$vnet = Get-AzVirtualNetwork `
+    -ResourceGroupName $ResourceGroupName `
+    -Name $VNetName
+
 #---------------------------------------------------------
 #Associate Web NSG with Web Subnet
-#------------------------------------------------.
+#---------------------------------------------------------
 
     # get the subnet object for the web subnet first
 
 $webSubnet = $vnet.Subnets |
     Where-Object Name -eq $WebSubnetName
+
+if ($null -eq $webSubnet) {
+
+    Write-LabLog "Subnet '$WebSubnetName' was not found." -Level ERROR
+
+    return
+}
 
     # associate the NSG with the subnet
 
@@ -156,12 +174,19 @@ $webSubnet.NetworkSecurityGroup = $webNSG
 
 #---------------------------------------------------------
 #Associate Backend NSG with Backend Subnet
-#------------------------------------------------.
+#---------------------------------------------------------
 
     # get the subnet object for the backend subnet first
 
 $backendSubnet = $vnet.Subnets |
     Where-Object Name -eq $BackendSubnetName
+
+if ($null -eq $backendSubnet) {
+
+    Write-LabLog "Subnet '$BackendSubnetName' was not found." -Level ERROR
+
+    return
+}
 
 Write-LabLog "Associating Network Security Group '$BackendNSGName' with Subnet '$BackendSubnetName'..."
 
@@ -179,5 +204,5 @@ if ($PSCmdlet.ShouldProcess($VNetName, "Associate Network Security Groups with S
     Set-AzVirtualNetwork `
         -VirtualNetwork $vnet
 
-    Write-LabLog "Network Security Groups associated successfully." -Level SUCCESS
+    Write-LabLog "Network Security Groups successfully associated with Web and Backend subnets." -Level SUCCESS
 }
