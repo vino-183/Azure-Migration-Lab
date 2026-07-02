@@ -33,8 +33,8 @@ $VNetAddressSpace = "10.10.0.0/16"
 $WebSubnetName = "snet-web"
 $WebSubnetPrefix = "10.10.1.0/24"
 
-$SqlSubnetName = "snet-sql"
-$SqlSubnetPrefix = "10.10.2.0/24"
+$BackendSubnetName = "snet-backend"
+$BackendSubnetPrefix = "10.10.2.0/24"
 
 $BastionSubnetName = "AzureBastionSubnet"
 $BastionSubnetPrefix = "10.10.3.0/26"
@@ -43,7 +43,7 @@ $BastionSubnetPrefix = "10.10.3.0/26"
 # Network Security Groups
 #---------------------------------------------------------
 $WebNSGName = "$Prefix-web-nsg"
-$SqlNSGName = "$Prefix-sql-nsg"
+$BackendNSGName = "$Prefix-backend-nsg"
 
 #---------------------------------------------------------
 # Public IPs
