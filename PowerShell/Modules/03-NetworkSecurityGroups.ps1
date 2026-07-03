@@ -1,6 +1,6 @@
 <#
 ================================================================================
-Script:     04-NetworkSecurityGroups.ps1
+Script:     03-NetworkSecurityGroups.ps1
 Purpose:    Creates Network Security Groups for the Azure Migration Lab
 ================================================================================
 #>
