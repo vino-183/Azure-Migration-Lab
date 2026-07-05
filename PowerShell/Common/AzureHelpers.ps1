@@ -236,3 +236,51 @@ function Test-PublicIpIfExists {
 
     Get-AzPublicIpAddress -Name $PublicIpName -ResourceGroupName $ResourceGroupName -ErrorAction SilentlyContinue
 }
+
+#---------------------------------------
+# Test-ResourceIfExists
+#---------------------------------------
+function Test-NicIfExists {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string]$ResourceGroupName,
+
+        [Parameter(Mandatory)]
+        [string]$NicName
+    )
+
+    Get-AzNetworkInterface -Name $NicName -ResourceGroupName $ResourceGroupName -ErrorAction SilentlyContinue
+}
+
+#---------------------------------------
+# Test-VMIfExists
+#---------------------------------------
+function Test-VMIfExists {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string]$ResourceGroupName,
+
+        [Parameter(Mandatory)]
+        [string]$VMName
+    )
+
+    Get-AzVM -Name $VMName -ResourceGroupName $ResourceGroupName -ErrorAction SilentlyContinue
+}
+
+#---------------------------------------
+# Test-DiskIfExists
+#---------------------------------------
+function Test-DiskIfExists {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string]$ResourceGroupName,
+
+        [Parameter(Mandatory)]
+        [string]$DiskName
+    )
+
+    Get-AzDisk -Name $DiskName -ResourceGroupName $ResourceGroupName -ErrorAction SilentlyContinue
+}
